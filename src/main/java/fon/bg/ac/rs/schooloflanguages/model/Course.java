@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="course")
-public class Course {
+public class Course implements MyEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

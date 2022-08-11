@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
+import fon.bg.ac.rs.schooloflanguages.mapper.CourseMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.repository.CourseRepository;
 
@@ -16,9 +19,13 @@ import fon.bg.ac.rs.schooloflanguages.repository.CourseRepository;
 public class CourseService {
 	@Autowired
 	private CourseRepository courseRepository;
+	private CourseMapper courseMapper=new CourseMapper();
 
-	public List<Course> getAll() {
-		return courseRepository.findAll();
+	public List<CourseDto> getAll() throws Exception {
+		List<Course> courses=courseRepository.findAll();
+		return courses.stream().map((entity)->{
+			return courseMapper.toDto(entity);
+		}).collect(Collectors.toList());
 	}
 
 	public Course createNew(Course course) {

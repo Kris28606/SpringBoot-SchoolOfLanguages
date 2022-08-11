@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.service.CourseService;
 
@@ -25,13 +26,14 @@ public class CourseController {
 	private CourseService courseService;
 	
 	@GetMapping("all")
-	public List<Course> VratiSve() {
+	public List<CourseDto> VratiSve() throws Exception {
 		return courseService.getAll();
 	}
 	
 	@PostMapping("new")
-	public Course SacuvajNovi(@RequestBody Course course) {
-		return courseService.createNew(course);
+	public CourseDto SacuvajNovi(@RequestBody Course course) {
+		//return courseService.createNew(course);
+		return null;
 	}
 	
 	@DeleteMapping("{id}")

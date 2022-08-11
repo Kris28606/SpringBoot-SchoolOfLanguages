@@ -18,7 +18,7 @@ import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="teacher")
-public class Teacher {
+public class Teacher implements MyEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
