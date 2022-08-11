@@ -32,8 +32,7 @@ public class CourseController {
 	
 	@PostMapping("new")
 	public CourseDto SacuvajNovi(@RequestBody Course course) {
-		//return courseService.createNew(course);
-		return null;
+		return courseService.createNew(course);
 	}
 	
 	@DeleteMapping("{id}")

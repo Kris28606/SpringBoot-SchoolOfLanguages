@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
+import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.CourseMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.repository.CourseRepository;
@@ -28,9 +29,10 @@ public class CourseService {
 		}).collect(Collectors.toList());
 	}
 
-	public Course createNew(Course course) {
-		return courseRepository.save(course);
-	}
+	public CourseDto createNew(Course course) {
+		course=courseRepository.save(course);
+		return courseMapper.toDto(course);
+	} 
 
 	public ResponseEntity<Map<String, Boolean>> deleteCourse(Long id) throws Exception {
 		Optional<Course> course=courseRepository.findById(id);
