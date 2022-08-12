@@ -39,10 +39,6 @@ public class Teacher implements MyEntity{
 	@JoinTable(name = "course_teacher", 
 			  joinColumns = @JoinColumn(name = "teacher_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "course_id"))
-	
-	
-	
-	
 	private List<Course> courses;
 
 	public Teacher() {

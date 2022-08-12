@@ -20,7 +20,11 @@ import fon.bg.ac.rs.schooloflanguages.repository.CourseRepository;
 public class CourseService {
 	@Autowired
 	private CourseRepository courseRepository;
-	private CourseMapper courseMapper=new CourseMapper();
+	private CourseMapper courseMapper;
+	
+	public CourseService(){
+		courseMapper=new CourseMapper();
+	}
 
 	public List<CourseDto> getAll() throws Exception {
 		List<Course> courses=courseRepository.findAll();
