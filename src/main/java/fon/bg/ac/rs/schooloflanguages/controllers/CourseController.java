@@ -71,5 +71,14 @@ public class CourseController {
 		}
 	}
 	
+	@GetMapping("/one/{id}")
+	public ResponseEntity<Object> UcitajJedan(@PathVariable("id") Long id) {
+		try {
+			return ResponseEntity.ok(courseService.one(id));
+		}catch(ErrorException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
+	
 	
 }
