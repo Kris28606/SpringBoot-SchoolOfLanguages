@@ -1,5 +1,6 @@
 package fon.bg.ac.rs.schooloflanguages.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,13 @@ public class CourseController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<Map<String, Boolean>> ObrisiKurs(@PathVariable("id") Long id) throws Exception {
-		return courseService.deleteCourse(id);
+	public ResponseEntity<Map<String, Boolean>> ObrisiKurs(@PathVariable("id") Long id){
+		try {
+			return courseService.deleteCourse(id);
+		}catch(ErrorException ex) {
+			Map<String, Boolean> response=new HashMap<>();
+			response.put("not deleted", Boolean.FALSE);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
 	}
 }

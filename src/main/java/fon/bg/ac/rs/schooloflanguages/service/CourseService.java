@@ -38,10 +38,10 @@ public class CourseService {
 		return courseMapper.toDto(course);
 	} 
 
-	public ResponseEntity<Map<String, Boolean>> deleteCourse(Long id) throws Exception {
+	public ResponseEntity<Map<String, Boolean>> deleteCourse(Long id) throws ErrorException {
 		Optional<Course> course=courseRepository.findById(id);
 		if(!course.isPresent()) {
-			throw new Exception("Course doesn't exist!");
+			throw new ErrorException("Course doesn't exist!");
 		}
 		courseRepository.delete(course.get());
 		Map<String, Boolean> response=new HashMap<>();
