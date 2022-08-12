@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
+import fon.bg.ac.rs.schooloflanguages.mapper.CourseMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.service.CourseService;
 
@@ -28,6 +29,11 @@ import fon.bg.ac.rs.schooloflanguages.service.CourseService;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
+	private CourseMapper courseMapper;
+	
+	public CourseController(){
+		courseMapper=new CourseMapper();
+	}
 	
 	@GetMapping("all")
 	public List<CourseDto> VratiSve() throws Exception {
@@ -35,9 +41,10 @@ public class CourseController {
 	}
 	
 	@PostMapping("new")
-	public ResponseEntity<Object> SacuvajNovi(@RequestBody Course course){
+	public ResponseEntity<Object> SacuvajNovi(@RequestBody CourseDto course){
 		try {
-			return ResponseEntity.ok(courseService.createNew(course));
+			Course c=courseMapper.toEntity(course);
+			return ResponseEntity.ok(courseService.createNew(c));
 		}catch(ErrorException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 		}

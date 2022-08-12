@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.TeacherDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
+import fon.bg.ac.rs.schooloflanguages.mapper.TeacherMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Teacher;
 import fon.bg.ac.rs.schooloflanguages.service.TeacherService;
 
@@ -23,6 +24,11 @@ import fon.bg.ac.rs.schooloflanguages.service.TeacherService;
 public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;
+	private TeacherMapper teacherMapper;
+	
+	public TeacherController() {
+		teacherMapper=new TeacherMapper();
+	}
 	
 	@GetMapping("all")
 	public List<TeacherDto> VratiSve() {
@@ -30,9 +36,10 @@ public class TeacherController {
 	}
 	
 	@PostMapping("new")
-	public ResponseEntity<Object> Sacuvaj(@RequestBody Teacher t) {
+	public ResponseEntity<Object> Sacuvaj(@RequestBody TeacherDto t) {
 		try {
-			return ResponseEntity.ok(teacherService.saveNew(t));
+			Teacher te=teacherMapper.toEntity(t);
+			return ResponseEntity.ok(teacherService.saveNew(te));
 		}catch(ErrorException ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 		}

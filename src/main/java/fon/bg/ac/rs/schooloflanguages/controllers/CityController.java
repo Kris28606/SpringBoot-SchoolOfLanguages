@@ -13,6 +13,7 @@ import fon.bg.ac.rs.schooloflanguages.service.CityService;
 
 @RestController
 @RequestMapping("city")
+@CrossOrigin
 public class CityController {
 	
 	@Autowired
