@@ -61,5 +61,15 @@ public class CourseController {
 		}
 	}*/
 	
+	@PutMapping("{id}")
+	public ResponseEntity<Object> Izmeni(@PathVariable("id") Long id, @RequestBody CourseDto course) {
+		try {
+			Course c=courseMapper.toEntity(course);
+			return ResponseEntity.ok(courseService.update(c, id));
+		}catch(ErrorException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
+	
 	
 }

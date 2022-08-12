@@ -53,5 +53,18 @@ public class CourseService {
 		return ResponseEntity.ok(response);
 	}*/
 	
+	public CourseDto update(Course course, Long id) throws ErrorException {
+		Optional<Course> optional=courseRepository.findById(id);
+		if(!optional.isPresent()) {
+			throw new ErrorException("Course doesn't exist!!");
+		}
+		Course c=optional.get();
+		c.setName(course.getName());
+		c.setStartDate(course.getStartDate());
+		c.setEndDate(course.getEndDate());
+		c.setPrice(course.getPrice());
+		c=courseRepository.save(c);
+		return courseMapper.toDto(c);
+	}
 	
 }

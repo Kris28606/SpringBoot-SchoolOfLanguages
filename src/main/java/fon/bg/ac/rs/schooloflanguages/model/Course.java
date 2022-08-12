@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -26,13 +28,20 @@ public class Course implements MyEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 30)
-	@NonNull
+	@NotNull(message="Name is required field!")
+	@NotEmpty(message="Name is required field!")
 	private String name;
-	@NonNull
+	
+	@NotNull(message="Price is required field!")
+	@NotEmpty(message="Price is required field!")
 	private BigDecimal price;
-	@NonNull
+	
+	@NotNull(message="Start date is required field!")
+	@NotEmpty(message="Start date is required field!")
 	private Timestamp startDate;
-	@NonNull
+	
+	@NotNull(message="End date is required field!")
+	@NotEmpty(message="End date is required field!")
 	private Timestamp endDate;
 	
 	@ManyToMany(mappedBy = "courses")

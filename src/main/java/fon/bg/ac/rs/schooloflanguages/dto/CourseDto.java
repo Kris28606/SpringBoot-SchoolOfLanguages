@@ -20,14 +20,22 @@ import javax.validation.constraints.NotNull;
 public class CourseDto implements Dto{
 	@NonNull
 	private Long id;
-	@NotEmpty(message="Name is required field!")
+	@NotNull(message="Name is required field!")
+	@NotEmpty(message="Price is required field!")
 	private String name;
-	@NotNull
+	
+	@NotNull(message="Price is required field!")
+	@NotEmpty(message="Price is required field!")
 	private BigDecimal price;
-	@NotNull
+	
+	@NotNull(message="Start date is required field!")
+	@NotEmpty(message="Start date is required field!")
 	private Timestamp startDate;
-	@NotNull
+	
+	@NotNull(message="End date is required field!")
+	@NotEmpty(message="End date is required field!")
 	private Timestamp endDate;
+	
 	public Long getId() {
 		return id;
 	}
