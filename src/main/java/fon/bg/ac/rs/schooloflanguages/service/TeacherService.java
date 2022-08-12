@@ -27,4 +27,8 @@ public class TeacherService {
 			return teacherMapper.toDto(teacher);
 		}).collect(Collectors.toList());
 	}
+
+	public Teacher saveNew(Teacher t) {
+		return teacherRepository.save(t);
+	}
 }

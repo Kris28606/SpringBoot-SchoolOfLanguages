@@ -9,8 +9,11 @@ import fon.bg.ac.rs.schooloflanguages.model.Teacher;
 
 public class TeacherMapper implements GenericMapper<TeacherDto, Teacher>{
 	
-	@Autowired
 	private CourseMapper courseMapper;
+	
+	public TeacherMapper() {
+		courseMapper=new CourseMapper();
+	}
 	
 	@Override
 	public Teacher toEntity(TeacherDto dto) {
