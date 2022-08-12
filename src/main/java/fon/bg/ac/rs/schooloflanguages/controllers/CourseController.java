@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
+import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.service.CourseService;
 
@@ -31,8 +33,12 @@ public class CourseController {
 	}
 	
 	@PostMapping("new")
-	public CourseDto SacuvajNovi(@RequestBody Course course) {
-		return courseService.createNew(course);
+	public ResponseEntity<Object> SacuvajNovi(@RequestBody Course course){
+		try {
+			return ResponseEntity.ok(courseService.createNew(course));
+		}catch(ErrorException ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
 	}
 	
 	@DeleteMapping("{id}")

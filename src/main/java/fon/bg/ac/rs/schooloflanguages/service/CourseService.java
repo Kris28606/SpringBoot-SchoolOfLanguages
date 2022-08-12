@@ -29,7 +29,11 @@ public class CourseService {
 		}).collect(Collectors.toList());
 	}
 
-	public CourseDto createNew(Course course) {
+	public CourseDto createNew(Course course) throws ErrorException {
+		Optional<Course> optional=courseRepository.findByName(course.getName());
+		if(optional.isPresent()) {
+			throw new ErrorException("Course alredy exist!");
+		}
 		course=courseRepository.save(course);
 		return courseMapper.toDto(course);
 	} 
@@ -44,4 +48,6 @@ public class CourseService {
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
 	}
+	
+	
 }
