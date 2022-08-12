@@ -25,9 +25,9 @@ public class Teacher implements MyEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NonNull
-	private String first_name;
+	private String firstName;
 	@NonNull
-	private String last_name;
+	private String lastName;
 	@NonNull
 	private String address;
 	@Column(unique=true)
@@ -47,17 +47,21 @@ public class Teacher implements MyEntity{
 		
 	}
 	
-	public Teacher(Long id, String first_name, String last_name, String address, String contact, City city,
+	
+
+	public Teacher(Long id, String firstName, String lastName, String address, String contact, City city,
 			List<Course> courses) {
 		super();
 		this.id = id;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
 		this.contact = contact;
 		this.city = city;
 		this.courses = courses;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -67,21 +71,31 @@ public class Teacher implements MyEntity{
 		this.id = id;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	
+
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+
+
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
+
+
 
 	public String getAddress() {
 		return address;

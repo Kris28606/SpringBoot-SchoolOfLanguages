@@ -18,8 +18,8 @@ public class TeacherMapper implements GenericMapper<TeacherDto, Teacher>{
 	@Override
 	public Teacher toEntity(TeacherDto dto) {
 		Teacher t=new Teacher();
-		t.setFirst_name(dto.getFirst_name());
-		t.setLast_name(dto.getLast_name());
+		t.setFirstName(dto.getFirst_name());
+		t.setLastName(dto.getLast_name());
 		t.setAddress(dto.getAddress());
 		t.setContact(dto.getContact());
 		t.setCity(dto.getCity());
@@ -33,8 +33,8 @@ public class TeacherMapper implements GenericMapper<TeacherDto, Teacher>{
 	@Override
 	public TeacherDto toDto(Teacher e) {
 		TeacherDto t=new TeacherDto();
-		t.setFirst_name(e.getFirst_name());
-		t.setLast_name(e.getLast_name());
+		t.setFirst_name(e.getFirstName());
+		t.setLast_name(e.getLastName());
 		t.setAddress(e.getAddress());
 		t.setContact(e.getContact());
 		t.setCity(e.getCity());
