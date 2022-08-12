@@ -42,7 +42,7 @@ public class CourseService {
 		return courseMapper.toDto(course);
 	} 
 
-	public ResponseEntity<Map<String, Boolean>> deleteCourse(Long id) throws ErrorException {
+	/*public ResponseEntity<Map<String, Boolean>> deleteCourse(Long id) throws ErrorException {
 		Optional<Course> course=courseRepository.findById(id);
 		if(!course.isPresent()) {
 			throw new ErrorException("Course doesn't exist!");
@@ -51,7 +51,7 @@ public class CourseService {
 		Map<String, Boolean> response=new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
-	}
+	}*/
 	
 	
 }

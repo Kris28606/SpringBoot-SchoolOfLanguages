@@ -42,7 +42,7 @@ public class CourseController {
 		}
 	}
 	
-	@DeleteMapping("{id}")
+	/*@DeleteMapping("{id}")
 	public ResponseEntity<Map<String, Boolean>> ObrisiKurs(@PathVariable("id") Long id){
 		try {
 			return courseService.deleteCourse(id);
@@ -51,5 +51,5 @@ public class CourseController {
 			response.put("not deleted", Boolean.FALSE);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
-	}
+	}*/
 }
