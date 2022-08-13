@@ -44,4 +44,22 @@ public class TeacherService {
 		}
 		
 	}
+
+	public TeacherDto one(Long id) throws ErrorException {
+		Optional<Teacher> optional=teacherRepository.findById(id);
+		if(!optional.isPresent()) {
+			throw new ErrorException("Teacher can't be found!");
+		}
+		return teacherMapper.toDto(optional.get());
+	}
+
+	public Object update(Long id, Teacher te) throws ErrorException {
+		Teacher t=teacherMapper.toEntity(one(id));
+		t.setFirstName(te.getFirstName());
+		t.setLastName(te.getLastName());
+		t.setAddress(te.getAddress());
+		t.setCity(te.getCity());
+		t.setCourses(te.getCourses());
+		return teacherMapper.toDto(teacherRepository.save(t));
+	}
 }
