@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fon.bg.ac.rs.schooloflanguages.dto.RequestDto;
 import fon.bg.ac.rs.schooloflanguages.dto.TeacherDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.TeacherMapper;
@@ -65,4 +66,14 @@ public class TeacherController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
+	
+	@PostMapping("find")
+	public ResponseEntity<Object> FindTeahers(@RequestBody RequestDto zahtev) {
+		try {
+			return ResponseEntity.ok(teacherService.find(zahtev.getKriterijum()));
+		} catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
+	
 }

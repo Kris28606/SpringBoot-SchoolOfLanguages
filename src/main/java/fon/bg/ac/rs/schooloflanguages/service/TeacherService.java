@@ -1,5 +1,6 @@
 package fon.bg.ac.rs.schooloflanguages.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,5 +62,18 @@ public class TeacherService {
 		t.setCity(te.getCity());
 		t.setCourses(te.getCourses());
 		return teacherMapper.toDto(teacherRepository.save(t));
+	}
+
+	public List<TeacherDto> find(String likePattern) {
+		List<Teacher> teachers=new ArrayList<>();
+		String pattern="%"+likePattern+"%";
+		teachers=teacherRepository.findByFirstNameLike(pattern);
+		if(teachers.isEmpty()) {
+			List<TeacherDto> prazna=new ArrayList<>();
+			return prazna;
+		}
+		return teachers.stream().map( (teacher)-> {
+			return teacherMapper.toDto(teacher);
+		}).collect(Collectors.toList());
 	}
 }
