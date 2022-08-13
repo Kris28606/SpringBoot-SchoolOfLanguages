@@ -1,5 +1,6 @@
 package fon.bg.ac.rs.schooloflanguages.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,18 @@ public class CourseService {
 		}
 		Course c=optional.get();
 		return courseMapper.toDto(c);
+	}
+	
+	public List<CourseDto> find(String kriterijum) {
+		String patern="%"+kriterijum+"%";
+		List<Course> courses=courseRepository.findByNameLike(patern);
+		if(courses.isEmpty()) {
+			List<CourseDto> prazna=new ArrayList<>();
+			return prazna;
+		}
+		return courses.stream().map((course)-> {
+			return courseMapper.toDto(course);
+		}).collect(Collectors.toList());
 	}
 	
 }

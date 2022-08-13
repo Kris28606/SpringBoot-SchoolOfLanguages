@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
+import fon.bg.ac.rs.schooloflanguages.dto.RequestDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.CourseMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
@@ -71,7 +72,7 @@ public class CourseController {
 		}
 	}
 	
-	@GetMapping("/one/{id}")
+	@GetMapping("one/{id}")
 	public ResponseEntity<Object> UcitajJedan(@PathVariable("id") Long id) {
 		try {
 			return ResponseEntity.ok(courseService.one(id));
@@ -80,5 +81,13 @@ public class CourseController {
 		}
 	}
 	
+	@PostMapping("find")
+	public ResponseEntity<Object> Nadji(@RequestBody RequestDto request) {
+		try {
+			return ResponseEntity.ok(courseService.find(request.getKriterijum()));
+		}catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
 	
 }
