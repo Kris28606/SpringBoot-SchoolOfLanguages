@@ -48,6 +48,10 @@ public class Course implements MyEntity{
 	@JsonIgnore
 	public List<Teacher> teachers;
 	
+	@ManyToMany(mappedBy="courses")
+	@JsonIgnore
+	public List<Student> students;
+	
 	public Course() {
 		
 	}
@@ -60,6 +64,7 @@ public class Course implements MyEntity{
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
 	public Long getId() {
 		return id;
 	}
