@@ -30,14 +30,20 @@ public class StudentDto implements Dto{
 	private String lastName;
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp datumRodjenja;
 	
 	private int years;
+	private String slika;
 	
 	@NotEmpty
 	private List<Course> courses;
 	
+	public String getSlika() {
+		return slika;
+	}
+	public void setSlika(String slika) {
+		this.slika = slika;
+	}
 	public int getYears() {
 		return years;
 	}

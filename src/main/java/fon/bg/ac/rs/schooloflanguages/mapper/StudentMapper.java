@@ -19,6 +19,7 @@ public class StudentMapper implements GenericMapper<StudentDto, Student>{
 		s.setLastName(dto.getLastName());
 		s.setCourses(dto.getCourses());
 		s.setDatumRodjenja(dto.getDatumRodjenja());
+		s.setSlika(dto.getSlika());
 		return s;
 	}
 
@@ -30,6 +31,7 @@ public class StudentMapper implements GenericMapper<StudentDto, Student>{
 		s.setLastName(e.getLastName());
 		s.setDatumRodjenja(e.getDatumRodjenja());
 		s.setCourses(e.getCourses());
+		s.setSlika(e.getSlika());
 		long trenutnaGodina=Timestamp.from(Instant.now()).getYear();
 		long godinaRodjenja=e.getDatumRodjenja().getYear();
 		long mesecRodjenja=e.getDatumRodjenja().getMonth();

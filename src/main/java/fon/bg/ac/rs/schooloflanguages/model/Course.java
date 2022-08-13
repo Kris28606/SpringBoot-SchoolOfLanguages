@@ -39,12 +39,10 @@ public class Course implements MyEntity{
 	
 	@NotNull(message="Start date is required field!")
 	@NotEmpty(message="Start date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp startDate;
 	
 	@NotNull(message="End date is required field!")
 	@NotEmpty(message="End date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp endDate;
 	
 	@ManyToMany(mappedBy = "courses")

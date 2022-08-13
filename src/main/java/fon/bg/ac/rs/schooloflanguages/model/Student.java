@@ -30,8 +30,8 @@ public class Student implements MyEntity{
 	private String lastName;
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp datumRodjenja;
+	private String slika;
 	
 	@ManyToMany
 	@JoinTable(name = "course_student", 
@@ -43,13 +43,22 @@ public class Student implements MyEntity{
 	public Student() {
 	}
 	
-	public Student(Long id,String firstName,String lastName,Timestamp datumRodjenja,List<Course> courses) {
+	public Student(Long id,String firstName,String lastName,Timestamp datumRodjenja,List<Course> courses, String slika) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.datumRodjenja = datumRodjenja;
 		this.courses = courses;
+		this.slika=slika;
+	}
+	
+	public String getSlika() {
+		return slika;
+	}
+
+	public void setSlika(String slika) {
+		this.slika = slika;
 	}
 
 	public Long getId() {
