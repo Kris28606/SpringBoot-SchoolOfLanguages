@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="student")
 public class Student implements MyEntity{
@@ -28,6 +30,7 @@ public class Student implements MyEntity{
 	private String lastName;
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp datumRodjenja;
 	
 	@ManyToMany

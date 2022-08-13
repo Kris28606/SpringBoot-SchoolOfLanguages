@@ -2,6 +2,8 @@ package fon.bg.ac.rs.schooloflanguages.dto;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,10 +32,12 @@ public class CourseDto implements Dto{
 	
 	@NotNull(message="Start date is required field!")
 	@NotEmpty(message="Start date is required field!")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp startDate;
 	
 	@NotNull(message="End date is required field!")
 	@NotEmpty(message="End date is required field!")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp endDate;
 	
 	public Long getId() {

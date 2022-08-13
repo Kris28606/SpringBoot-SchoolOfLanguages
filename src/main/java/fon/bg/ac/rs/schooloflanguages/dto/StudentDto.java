@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +30,20 @@ public class StudentDto implements Dto{
 	private String lastName;
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy.")
 	private Timestamp datumRodjenja;
+	
+	private int years;
+	
 	@NotEmpty
 	private List<Course> courses;
 	
+	public int getYears() {
+		return years;
+	}
+	public void setYears(int years) {
+		this.years = years;
+	}
 	public List<Course> getCourses() {
 		return courses;
 	}
