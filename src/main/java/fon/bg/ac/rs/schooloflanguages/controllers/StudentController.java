@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.StudentDto;
+import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.StudentMapper;
+import fon.bg.ac.rs.schooloflanguages.model.Student;
 import fon.bg.ac.rs.schooloflanguages.service.StudentService;
 
 @RestController
@@ -43,6 +47,17 @@ public class StudentController {
 			Map<String, Boolean> response=new HashMap<>();
 			response.put("not deleted", Boolean.FALSE);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+	
+	@PostMapping("new")
+	public ResponseEntity<Object> sacuvajNovog(@RequestBody StudentDto student){
+		try {
+			System.out.print(student);
+			Student s=studentMapper.toEntity(student);
+			return ResponseEntity.ok(studentService.save(s));
+		} catch(ErrorException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 }

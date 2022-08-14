@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import fon.bg.ac.rs.schooloflanguages.dto.StudentDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.StudentMapper;
+import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
 import fon.bg.ac.rs.schooloflanguages.repository.StudentRepository;
 
@@ -47,5 +48,14 @@ public class StudentService {
 		Map<String, Boolean> response=new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
+	}
+
+	public StudentDto save(Student entity) throws ErrorException {
+		Optional<Student> optional=studentRepository.findByFirstNameAndLastName(entity.getFirstName(), entity.getLastName());
+		if(optional.isPresent()) {
+			throw new ErrorException("Student alredy exist!");
+		}
+		entity=studentRepository.save(entity);
+		return studentMapper.toDto(entity);
 	}
 }

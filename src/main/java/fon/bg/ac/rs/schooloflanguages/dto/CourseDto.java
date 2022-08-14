@@ -32,12 +32,12 @@ public class CourseDto implements Dto{
 	
 	@NotNull(message="Start date is required field!")
 	@NotEmpty(message="Start date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp startDate;
 	
 	@NotNull(message="End date is required field!")
 	@NotEmpty(message="End date is required field!")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp endDate;
 	
 	public Long getId() {
