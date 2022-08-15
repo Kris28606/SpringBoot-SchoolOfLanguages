@@ -13,7 +13,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 import fon.bg.ac.rs.schooloflanguages.model.PaymentMethod;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class InvoiceDto implements Dto{
 	@NonNull
 	private Long id;
@@ -24,9 +30,9 @@ public class InvoiceDto implements Dto{
 	private double totalPrice;
 	private PaymentMethod paymentMethod;
 	private boolean cancelled;
-	private Student student;
+	private StudentDto student;
 	@NotEmpty(message="Items can't be empty!")
-	private List<InvoiceItem> items;
+	private List<InvoiceItemDto> items;
 	
 	public Long getId() {
 		return id;
@@ -58,16 +64,16 @@ public class InvoiceDto implements Dto{
 	public void setCancelled(boolean cancelled) {
 		this.cancelled = cancelled;
 	}
-	public Student getStudent() {
+	public StudentDto getStudent() {
 		return student;
 	}
-	public void setStudent(Student student) {
+	public void setStudent(StudentDto student) {
 		this.student = student;
 	}
-	public List<InvoiceItem> getItems() {
+	public List<InvoiceItemDto> getItems() {
 		return items;
 	}
-	public void setItems(List<InvoiceItem> items) {
+	public void setItems(List<InvoiceItemDto> items) {
 		this.items = items;
 	}
 }
