@@ -4,17 +4,20 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="student")
@@ -38,6 +41,10 @@ public class Student implements MyEntity{
 			  joinColumns = @JoinColumn(name = "student_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> courses;
+	
+	@ManyToMany(mappedBy = "student", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Invoice> invoices;
 
 	
 	public Student() {
