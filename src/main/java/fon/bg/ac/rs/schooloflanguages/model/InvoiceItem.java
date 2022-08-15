@@ -12,7 +12,7 @@ import fon.bg.ac.rs.schooloflanguages.model.idclasses.InvoiceItemId;
 @Entity
 @Table(name="invoice_item")
 @IdClass(InvoiceItemId.class)
-public class InvoiceItem {
+public class InvoiceItem implements MyEntity{
 	@Id
 	@ManyToOne
 	@JoinColumn(name="invoice_id", nullable=false)

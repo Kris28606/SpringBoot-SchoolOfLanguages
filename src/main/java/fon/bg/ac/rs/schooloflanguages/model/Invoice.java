@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class Invoice implements MyEntity {
 	@JoinColumn(name="student_id")
 	private Student student;
 	
-	@ManyToMany(mappedBy = "invoice")
+	@OneToMany(mappedBy = "invoice")
 	private List<InvoiceItem> items;
 	
 	public Invoice() {
