@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,7 @@ public class Invoice implements MyEntity {
 	private double totalPrice;
 	private PaymentMethod paymentMethod;
 	private boolean cancelled;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="student_id")
 	private Student student;
 	

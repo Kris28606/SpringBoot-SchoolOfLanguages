@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,14 +17,14 @@ import fon.bg.ac.rs.schooloflanguages.model.idclasses.InvoiceItemId;
 @IdClass(InvoiceItemId.class)
 public class InvoiceItem implements MyEntity{
 	@Id
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="invoice_id", nullable=false)
 	@JsonIgnore
 	private Invoice invoice;
 	@Id
 	private Long sn;
 	private double itemValue;
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="course_id", nullable=false)
 	private Course course;
 	

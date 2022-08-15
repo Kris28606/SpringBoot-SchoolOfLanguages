@@ -53,6 +53,10 @@ public class Course implements MyEntity{
 	@JsonIgnore
 	public List<Student> students;
 	
+	@ManyToMany(mappedBy="course")
+	@JsonIgnore
+	public List<InvoiceItem> items;
+	
 	public Course() {
 		
 	}
