@@ -37,7 +37,7 @@ public class StudentDto implements Dto{
 	private String slika;
 	
 	@NotEmpty
-	private List<Course> courses;
+	private List<CourseDto> courses;
 	
 	public String getSlika() {
 		return slika;
@@ -51,10 +51,10 @@ public class StudentDto implements Dto{
 	public void setYears(int years) {
 		this.years = years;
 	}
-	public List<Course> getCourses() {
+	public List<CourseDto> getCourses() {
 		return courses;
 	}
-	public void setCourses(List<Course> courses) {
+	public void setCourses(List<CourseDto> courses) {
 		this.courses = courses;
 	}
 	public Long getId() {

@@ -27,7 +27,7 @@ public class TeacherDto implements Dto{
 	@NotEmpty(message="Contact is required field!")
 	private String contact;
 	@NotNull(message="City is required field!")
-	private City city;
+	private CityDto city;
 	@NotEmpty(message="Courses is required field!")
 	private List<CourseDto> courses;
 	public Long getId() {
@@ -60,10 +60,10 @@ public class TeacherDto implements Dto{
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public City getCity() {
+	public CityDto getCity() {
 		return city;
 	}
-	public void setCity(City city) {
+	public void setCity(CityDto city) {
 		this.city = city;
 	}
 	public List<CourseDto> getCourses() {
