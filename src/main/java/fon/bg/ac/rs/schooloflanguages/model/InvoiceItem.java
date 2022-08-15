@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import fon.bg.ac.rs.schooloflanguages.model.idclasses.InvoiceItemId;
 
 @Entity
@@ -16,6 +18,7 @@ public class InvoiceItem implements MyEntity{
 	@Id
 	@ManyToOne
 	@JoinColumn(name="invoice_id", nullable=false)
+	@JsonIgnore
 	private Invoice invoice;
 	@Id
 	private Long sn;
