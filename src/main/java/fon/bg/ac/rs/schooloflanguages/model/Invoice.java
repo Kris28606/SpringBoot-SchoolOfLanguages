@@ -28,7 +28,7 @@ public class Invoice implements MyEntity {
 	private double totalPrice;
 	private PaymentMethod paymentMethod;
 	private boolean cancelled;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="student_id")
 	private Student student;
 	

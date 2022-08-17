@@ -1,9 +1,12 @@
 package fon.bg.ac.rs.schooloflanguages.mapper;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import fon.bg.ac.rs.schooloflanguages.dto.InvoiceDto;
+import fon.bg.ac.rs.schooloflanguages.dto.InvoiceItemDto;
 import fon.bg.ac.rs.schooloflanguages.model.Invoice;
+import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 
 public class InvoiceMapper implements GenericMapper<InvoiceDto, Invoice>{
 

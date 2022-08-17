@@ -42,7 +42,7 @@ public class Student implements MyEntity{
 			  inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> courses;
 	
-	@ManyToMany(mappedBy = "student", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Invoice> invoices;
 

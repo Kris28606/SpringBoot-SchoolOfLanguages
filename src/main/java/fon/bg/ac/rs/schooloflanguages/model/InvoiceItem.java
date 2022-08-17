@@ -1,5 +1,7 @@
 package fon.bg.ac.rs.schooloflanguages.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -28,7 +30,23 @@ public class InvoiceItem implements MyEntity{
 	@JoinColumn(name="course_id", nullable=false)
 	private Course course;
 	
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(course);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InvoiceItem other = (InvoiceItem) obj;
+		return Objects.equals(course, other.course);
+	}
+
 	public InvoiceItem() {
 		
 	}

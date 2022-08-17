@@ -3,6 +3,7 @@ package fon.bg.ac.rs.schooloflanguages.model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,6 +58,23 @@ public class Course implements MyEntity{
 	@JsonIgnore
 	public List<InvoiceItem> items;
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		return Objects.equals(name, other.name);
+	}
+
 	public Course() {
 		
 	}

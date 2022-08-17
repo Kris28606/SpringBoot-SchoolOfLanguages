@@ -4,13 +4,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fon.bg.ac.rs.schooloflanguages.dto.InvoiceDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.InvoiceMapper;
+import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.model.Invoice;
+import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
+import fon.bg.ac.rs.schooloflanguages.model.Student;
+import fon.bg.ac.rs.schooloflanguages.repository.InvoiceItemRepository;
 import fon.bg.ac.rs.schooloflanguages.repository.InvoiceRepository;
 
 @Service
@@ -18,6 +24,8 @@ public class InvoiceService {
 	@Autowired
 	private InvoiceRepository invoiceRepository;
 	private InvoiceMapper invoiceMapper;
+	@Autowired
+	private InvoiceItemRepository invoiceItemRepository;
 	
 	public InvoiceService() {
 		this.invoiceMapper=new InvoiceMapper();
@@ -42,5 +50,28 @@ public class InvoiceService {
 		i.setCancelled(true);
 		i= invoiceRepository.save(i);
 		return invoiceMapper.toDto(i);
+	}
+	
+	@Transactional
+	public InvoiceDto sacuvaj(Invoice invoice) throws Exception {
+		List<Invoice> lista=invoiceRepository.findByStudent(invoice.getStudent());
+		if(!lista.isEmpty()) {
+			for(Invoice inv : lista) {
+			for (InvoiceItem ii : inv.getItems()) {
+				if(invoice.getItems().contains(ii.getCourse())) {
+					throw new ErrorException("Ne moze da se napravi ponovo faktura za istog korisnika!");
+				}
+			}
+			}
+		}
+		List<InvoiceItem> items=invoice.getItems();
+		invoice.setItems(null);
+		invoice=invoiceRepository.save(invoice);
+		for(InvoiceItem ii: items) {
+			ii.setInvoice(invoice);
+			invoiceItemRepository.save(ii);
+		}
+		invoice.setItems(items);
+		return invoiceMapper.toDto(invoice);
 	}
 }
