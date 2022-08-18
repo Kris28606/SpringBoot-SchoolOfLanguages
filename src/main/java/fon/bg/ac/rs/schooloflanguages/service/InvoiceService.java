@@ -1,5 +1,6 @@
 package fon.bg.ac.rs.schooloflanguages.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,5 +74,25 @@ public class InvoiceService {
 		}
 		invoice.setItems(items);
 		return invoiceMapper.toDto(invoice);
+	}
+	
+	public List<Course> vratiKurseveZaKorisnika(Student s) {
+		List<Invoice> optional=invoiceRepository.findByStudent(s);
+		if(optional.isEmpty()) {
+			return s.getCourses();
+		}
+		List<Course> kursevi=new ArrayList<>();
+		for(Invoice i : optional) {
+			for(InvoiceItem ii : i.getItems()) {
+				kursevi.add(ii.getCourse());
+			}
+		}
+		List<Course> kurseviFinal=s.getCourses();
+		for(int i =0;i<kursevi.size();i++) {
+			if(kursevi.contains(kurseviFinal.get(i))) {
+				kurseviFinal.remove(i);
+			}
+		}
+		return kurseviFinal;
 	}
 }

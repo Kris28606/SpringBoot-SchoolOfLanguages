@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fon.bg.ac.rs.schooloflanguages.dto.InvoiceDto;
+import fon.bg.ac.rs.schooloflanguages.dto.StudentDto;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.mapper.InvoiceMapper;
+import fon.bg.ac.rs.schooloflanguages.mapper.StudentMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.service.InvoiceService;
 
@@ -28,9 +30,11 @@ public class InvoiceController {
 	@Autowired
 	private InvoiceService invoiceService;
 	private InvoiceMapper invoiceMapper;
+	private StudentMapper studentMapper;
 	
 	public InvoiceController() {
 		this.invoiceMapper=new InvoiceMapper();
+		this.studentMapper=new StudentMapper();
 	}
 	
 	@GetMapping("all")
@@ -57,6 +61,15 @@ public class InvoiceController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 		}
 		catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
+	
+	@PostMapping("get-courses")
+	public ResponseEntity<Object> vratiKurseveZaFakturu(@RequestBody StudentDto student) {
+		try {
+			return ResponseEntity.ok(invoiceService.vratiKurseveZaKorisnika(studentMapper.toEntity(student)));
+		} catch(Exception ex) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 		}
 	}
