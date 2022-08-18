@@ -39,7 +39,14 @@ public class CourseDto implements Dto{
 	@NotEmpty(message="End date is required field!")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Timestamp endDate;
+	private boolean isSelected=false;
 	
+	public boolean isSelected() {
+		return isSelected;
+	}
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
 	public Long getId() {
 		return id;
 	}
