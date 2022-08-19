@@ -26,7 +26,7 @@ import fon.bg.ac.rs.schooloflanguages.service.CourseService;
 
 @RestController
 @RequestMapping("course")
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class CourseController {
 	@Autowired
 	private CourseService courseService;

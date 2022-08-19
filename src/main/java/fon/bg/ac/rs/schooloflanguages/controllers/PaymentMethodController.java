@@ -11,7 +11,7 @@ import fon.bg.ac.rs.schooloflanguages.service.PaymentMethodService;
 
 @RestController
 @RequestMapping("payment-method")
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class PaymentMethodController {
 	@Autowired
 	private PaymentMethodService paymentMethodService;

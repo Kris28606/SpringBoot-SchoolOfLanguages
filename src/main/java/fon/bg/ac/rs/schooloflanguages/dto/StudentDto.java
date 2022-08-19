@@ -11,6 +11,7 @@ import org.springframework.lang.NonNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import fon.bg.ac.rs.schooloflanguages.model.Course;
+import fon.bg.ac.rs.schooloflanguages.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,17 +35,18 @@ public class StudentDto implements Dto{
 	private Timestamp datumRodjenja;
 	
 	private int years;
-	private String slika;
+	private Gender pol;
 	
+	
+	public Gender getPol() {
+		return pol;
+	}
+	public void setPol(Gender pol) {
+		this.pol = pol;
+	}
 	@NotEmpty
 	private List<CourseDto> courses;
 	
-	public String getSlika() {
-		return slika;
-	}
-	public void setSlika(String slika) {
-		this.slika = slika;
-	}
 	public int getYears() {
 		return years;
 	}

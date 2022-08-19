@@ -23,7 +23,7 @@ import fon.bg.ac.rs.schooloflanguages.service.TeacherService;
 
 @RestController
 @RequestMapping("teacher")
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;

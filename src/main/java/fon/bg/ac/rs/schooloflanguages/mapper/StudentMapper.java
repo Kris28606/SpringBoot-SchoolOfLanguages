@@ -28,7 +28,7 @@ public class StudentMapper implements GenericMapper<StudentDto, Student>{
 			return courseMapper.toEntity(course);
 		}).collect(Collectors.toList()));
 		s.setDatumRodjenja(dto.getDatumRodjenja());
-		s.setSlika(dto.getSlika());
+		s.setPol(dto.getPol());
 		return s;
 	}
 
@@ -42,7 +42,7 @@ public class StudentMapper implements GenericMapper<StudentDto, Student>{
 		s.setCourses(e.getCourses().stream().map((course)->{
 			return courseMapper.toDto(course);
 		}).collect(Collectors.toList()));
-		s.setSlika(e.getSlika());
+		s.setPol(e.getPol());
 		long trenutnaGodina=Timestamp.from(Instant.now()).getYear();
 		long godinaRodjenja=e.getDatumRodjenja().getYear();
 		long mesecRodjenja=e.getDatumRodjenja().getMonth();

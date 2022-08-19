@@ -25,7 +25,7 @@ import fon.bg.ac.rs.schooloflanguages.service.InvoiceService;
 
 @RestController
 @RequestMapping("invoice")
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class InvoiceController {
 	@Autowired
 	private InvoiceService invoiceService;
