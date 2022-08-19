@@ -74,5 +74,13 @@ public class InvoiceController {
 		}
 	}
 	
+	@GetMapping("id")
+	public ResponseEntity<Object> vratiJednu(@PathVariable("id") long id) {
+		try {
+			return ResponseEntity.ok(invoiceService.findOne(id));
+		} catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+		}
+	}
 
 }

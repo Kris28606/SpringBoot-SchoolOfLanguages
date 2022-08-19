@@ -95,4 +95,13 @@ public class InvoiceService {
 		}
 		return kurseviFinal;
 	}
+
+	public InvoiceDto findOne(long id) throws ErrorException {
+		Optional<Invoice> optional=invoiceRepository.findById(id);
+		if(!optional.isPresent()) {
+			throw new ErrorException("Can't find invoice!");
+		}
+		Invoice in=optional.get();
+		return invoiceMapper.toDto(in);
+	}
 }
