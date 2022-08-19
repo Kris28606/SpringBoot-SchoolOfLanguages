@@ -35,14 +35,14 @@ public class StudentDto implements Dto{
 	private Timestamp datumRodjenja;
 	
 	private int years;
-	private Gender pol;
+	private Gender gender;
 	
 	
-	public Gender getPol() {
-		return pol;
+	public Gender getGender() {
+		return gender;
 	}
-	public void setPol(Gender pol) {
-		this.pol = pol;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 	@NotEmpty
 	private List<CourseDto> courses;

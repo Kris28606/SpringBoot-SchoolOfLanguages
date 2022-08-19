@@ -34,7 +34,7 @@ public class Student implements MyEntity{
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
 	private Timestamp datumRodjenja;
-	private Gender pol;
+	private Gender gender;
 	
 	@ManyToMany
 	@JoinTable(name = "course_student", 
@@ -51,25 +51,25 @@ public class Student implements MyEntity{
 	}
 
 	public Student(Long id,String firstName,String lastName,Timestamp datumRodjenja,
-			Gender pol) {
+			Gender gender) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.datumRodjenja = datumRodjenja;
-		this.pol = pol;
+		this.gender = gender;
 	}
 
 
 
-	public Gender getPol() {
-		return pol;
+	public Gender getGender() {
+		return gender;
 	}
 
 
 
-	public void setPol(Gender pol) {
-		this.pol = pol;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public Long getId() {
