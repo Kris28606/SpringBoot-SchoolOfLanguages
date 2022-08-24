@@ -16,15 +16,34 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Domenska klasa koja predstavlja Fakturu za Korisnika.
+ * Faktura ima svoj Id, Datum, Ukupnu cenu, Nacin placanja i podatak koji 
+ * govori da li je stornirana
+ * 
+ * @author Kristina
+ *
+ */
 @Entity
 @Table(name="invoice")
 public class Invoice implements MyEntity {
+	/**
+	 * Id fakture - jedinstveni identifikator Fakture u bazi
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	/**
+	 * Datum kreiranja fakture
+	 */
 	@NotNull(message="Date is required field!")
 	@NotEmpty(message="Date is required field!")
 	private Timestamp date;
+	
+	/**
+	 * Ukupna vrednost fakture
+	 */
 	private double totalPrice;
 	private PaymentMethod paymentMethod;
 	private boolean cancelled;
