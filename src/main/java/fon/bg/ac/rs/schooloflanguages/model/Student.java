@@ -63,7 +63,8 @@ public class Student implements MyEntity{
 	private Gender gender;
 	
 	/**
-	 * Lista kurseva koje pohadja Student
+	 * Lista kurseva koje pohadja Student.
+	 * Jedan student moze da pohadja vise kurseva.
 	 */
 	@ManyToMany
 	@JoinTable(name = "course_student", 
@@ -72,14 +73,15 @@ public class Student implements MyEntity{
 	private List<Course> courses;
 	
 	/**
-	 * Lista faktura za Korisnika
+	 * Lista faktura za Studenta.
+	 * Jedan student moze da ima vise faktura.
 	 */
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Invoice> invoices;
 
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public Student() {
 	}

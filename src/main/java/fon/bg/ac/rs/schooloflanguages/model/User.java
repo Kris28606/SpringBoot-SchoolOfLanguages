@@ -39,8 +39,8 @@ public class User implements MyEntity{
 	private String lastName;
 	
 	/**
-	 * Username korisnika
-	 * Jedinstvena vrednost u bazi
+	 * Username korisnika.
+	 * Jedinstvena vrednost u bazi.
 	 */
 	@Column(unique = true)
 	@NonNull
@@ -54,7 +54,7 @@ public class User implements MyEntity{
 	
 	
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public User() {
 		

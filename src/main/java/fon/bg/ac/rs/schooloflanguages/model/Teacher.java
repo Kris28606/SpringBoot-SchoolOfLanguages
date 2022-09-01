@@ -58,14 +58,16 @@ public class Teacher implements MyEntity{
 	@NonNull
 	private String contact;
 	/**
-	 * Mesto iz kog je Predavac
+	 * Mesto iz kog je Predavac.
+	 * Jedan predavac je iz jednog i samo jednog Grada.
 	 */
 	@ManyToOne
 	@JoinColumn(name="city_id")
 	private City city;
 	
 	/**
-	 * Kursevi na kojima predaje Predavac
+	 * Kursevi na kojima predaje Predavac.
+	 * Jedan predavac moze da predaje na vise kurseva.
 	 */
 	@ManyToMany
 	@JoinTable(name = "course_teacher", 
@@ -74,7 +76,7 @@ public class Teacher implements MyEntity{
 	private List<Course> courses;
 	
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public Teacher() {
 		
@@ -219,7 +221,7 @@ public class Teacher implements MyEntity{
 	}
 	
 	/**
-	 * Vraca kurseve na koji predavac predaje
+	 * Vraca kurseve na kojima predavac predaje
 	 * 
 	 * @return Listu kurseva na kojima predaje predavac
 	 */

@@ -25,7 +25,8 @@ import fon.bg.ac.rs.schooloflanguages.model.idclasses.InvoiceItemId;
 @IdClass(InvoiceItemId.class)
 public class InvoiceItem implements MyEntity{
 	/**
-	 * Faktura na koju se Stavka fakture odnosi
+	 * Faktura na koju se Stavka fakture odnosi.
+	 * Jedna stavka se odnosi na jednu i samo jednu fakturu.
 	 */
 	@Id
 	@OneToOne
@@ -43,7 +44,8 @@ public class InvoiceItem implements MyEntity{
 	private double itemValue;
 	
 	/**
-	 * Kurs na koji se odnosi Stavka fakture
+	 * Kurs na koji se odnosi Stavka fakture.
+	 * Jedna stavka se odnosi na jedan i samo jedan kurs.
 	 */
 	@OneToOne
 	@JoinColumn(name="course_id", nullable=false)
@@ -79,7 +81,7 @@ public class InvoiceItem implements MyEntity{
 	}
 
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public InvoiceItem() {
 		

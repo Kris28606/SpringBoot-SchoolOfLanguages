@@ -44,14 +44,15 @@ public class City implements MyEntity{
 	private int PTT;
 	
 	/**
-	 * Lista predavaca koji zive u gradu
+	 * Lista predavaca koji zive u gradu.
+	 * Jedan grad moze da ima nula ili vise predavaca koji su iz tog grada.
 	 */
 	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Teacher> teachers;
 	
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public City() {
 	}

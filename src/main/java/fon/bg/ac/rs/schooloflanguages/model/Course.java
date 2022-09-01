@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -65,23 +66,26 @@ public class Course implements MyEntity{
 	private Timestamp endDate;
 	
 	/**
-	 * Lista svih predavaca koji predaju na kursu
+	 * Lista svih predavaca koji predaju na kursu.
+	 * Na jednom kursu moze da predaje vise predavaca.
 	 */
 	@ManyToMany(mappedBy = "courses")
 	@JsonIgnore
 	public List<Teacher> teachers;
 	
 	/**
-	 * Lista svih studenata koji pohadjaju kurs
+	 * Lista svih studenata koji pohadjaju kurs.
+	 * Jedan kurs moze da pohadja vise studenata.
 	 */
 	@ManyToMany(mappedBy="courses")
 	@JsonIgnore
 	public List<Student> students;
 	
 	/**
-	 * Lista svih stavki fakture na kojima se nalazi kurs
+	 * Lista svih stavki fakture na kojima se nalazi kurs.
+	 * Jedan kurs moze da se odnosi na vise stavki fakture.
 	 */
-	@ManyToMany(mappedBy="course")
+	@OneToMany(mappedBy="course")
 	@JsonIgnore
 	public List<InvoiceItem> items;
 	
@@ -115,7 +119,7 @@ public class Course implements MyEntity{
 		return Objects.equals(name, other.name);
 	}
 	/**
-	 * Neparametrizovani konstruktor
+	 * Bezparametarski konstruktor
 	 */
 	public Course() {
 		
