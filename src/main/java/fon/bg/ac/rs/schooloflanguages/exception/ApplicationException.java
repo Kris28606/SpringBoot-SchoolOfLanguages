@@ -1,5 +1,10 @@
 package fon.bg.ac.rs.schooloflanguages.exception;
 
+/**
+ * Korisnicki definisan exception koji nasledjuju klasu Exception
+ * @author Kristina
+ *
+ */
 public class ApplicationException extends Exception{
 
 	public ApplicationException() {
