@@ -10,14 +10,33 @@ import org.springframework.format.datetime.standard.InstantFormatter;
 import fon.bg.ac.rs.schooloflanguages.dto.StudentDto;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
 
+/**
+ * Maper koji predstavlja implementaciju Generickog mapera za entitet Student.
+ * 
+ * @author Kristina
+ *
+ */
 public class StudentMapper implements GenericMapper<StudentDto, Student>{
 
+	/**
+	 * Maper za entitet Kurs
+	 */
 	private CourseMapper courseMapper;
 	
+	/**
+	 * Bezparametarski konstruktor u okviru kojeg se inicijalizuje vrednost za Kurs maper.
+	 */
 	public StudentMapper() {
 		this.courseMapper=new CourseMapper();
 	}
 	
+	/**
+	 * Transformise Student dto u Student entitet.
+	 * Koristi Kurs maper da mapira sve kurseve koje Student pohadja.
+	 * 
+	 * @param dto - Student dto
+	 * @return Student entitet
+	 */
 	@Override
 	public Student toEntity(StudentDto dto) {
 		Student s=new Student();
@@ -31,7 +50,15 @@ public class StudentMapper implements GenericMapper<StudentDto, Student>{
 		s.setGender(dto.getGender());
 		return s;
 	}
-
+	
+	/**
+	 * Transformise Student entitet u Student dto.
+	 * Racuna i postavlja vrednost za atribut Broj godina na osnovu Datuma rodjenja.
+	 * Koristi Kurs maper da mapira sve kurseve koje Student pohadja.
+	 * 
+	 * @param e - Student entitet
+	 * @return Student dto
+	 */
 	@Override
 	public StudentDto toDto(Student e) {
 		StudentDto s=new StudentDto();

@@ -9,16 +9,40 @@ import fon.bg.ac.rs.schooloflanguages.dto.TeacherDto;
 import fon.bg.ac.rs.schooloflanguages.model.City;
 import fon.bg.ac.rs.schooloflanguages.model.Teacher;
 
+/**
+ * Maper koji predstavlja implementaciju Generickog mapera za entitet Predavac.
+ * 
+ * @author Kristina
+ *
+ */
 public class TeacherMapper implements GenericMapper<TeacherDto, Teacher>{
 	
+	/**
+	 * Maper za entite Kurs
+	 */
 	private CourseMapper courseMapper;
+	
+	/**
+	 * Maper za entitet Grad
+	 */
 	private CityMapper cityMapper;
 	
+	/**
+	 * Bezparametarski konstruktor u okviru kojeg se inicijalizuju vrednosti za Kurs i Grad maper.
+	 */
 	public TeacherMapper() {
 		courseMapper=new CourseMapper();
 		cityMapper=new CityMapper();
 	}
 	
+	/**
+	 * Transformise Predavac dto u Predavac entitet.
+	 * Koristi Grad maper da mapira grad iz kojeg je predavac.
+	 * Koristi Kurs maper da mapira sve kurseve na kojima Predavac predaje.
+	 * 
+	 * @param dto - Predavac dto
+	 * @return Predavac entitet
+	 */
 	@Override
 	public Teacher toEntity(TeacherDto dto) {
 		Teacher t=new Teacher();
@@ -36,6 +60,14 @@ public class TeacherMapper implements GenericMapper<TeacherDto, Teacher>{
 		return t;
 	}
 
+	/**
+	 * Transformise Predavac entitet u Predavac dto.
+	 * Koristi Grad maper da mapira grad iz kojeg je predavac.
+	 * Koristi Kurs maper da mapira sve kurseve na kojima Predavac predaje.
+	 * 
+	 * @param e - Predavac entitet
+	 * @return Predavac dto
+	 */
 	@Override
 	public TeacherDto toDto(Teacher e) {
 		TeacherDto t=new TeacherDto();
