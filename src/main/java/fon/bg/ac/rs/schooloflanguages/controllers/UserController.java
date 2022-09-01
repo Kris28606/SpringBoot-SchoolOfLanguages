@@ -15,19 +15,47 @@ import fon.bg.ac.rs.schooloflanguages.mapper.UserMapper;
 import fon.bg.ac.rs.schooloflanguages.model.User;
 import fon.bg.ac.rs.schooloflanguages.service.UserService;
 
+/**
+ * <h1>Kontroler za entitet User</h1>
+ * <p> Odgovora za definisanje End Point-a i pozivanje odgovarajucih servis metoda</p>
+ * @author Kristina
+ *
+ */
 @RestController
 @RequestMapping("login")
 @CrossOrigin("http://localhost:4200")
 public class UserController {
 	
+	/**
+	 * Servis za entitet User
+	 */
 	@Autowired
 	private UserService userService;
+	
+	/**
+	 * Maper za entiter user.
+	 * Pretvara objekte iz UserDto u User i obrnuto.
+	 */
 	private UserMapper userMapper;
 	
+	/**
+	 * Bezparametarski konstruktor u okviru kojeg se samo inicijalizuje vrednost za User mapper
+	 */
 	public UserController() {
 		this.userMapper=new UserMapper();
 	}
 	
+	/**
+	 * <h1>End point za login usera </h1>
+	 * <p>Post ruta "login"</p>
+	 * @param u - User koji hoce da se uloguje kao UserDto objekat
+	 * @return
+	 * <ul> 
+	 * 	<li>ResponseEntity.ok(UserDto)-ukoliko je User pronadjen</li>
+	 *  <li>ResponseEntity.BadRequest()-ukoliko User nije pronadjen</li>
+	 *  <li>ResponseEntity.InternalServerError()-ukoliko upit ne moze da se izvrsi</li>
+	 * </ul>
+	 */
 	@PostMapping
 	public ResponseEntity<Object> logIn(@RequestBody UserDto u) {
 		try {

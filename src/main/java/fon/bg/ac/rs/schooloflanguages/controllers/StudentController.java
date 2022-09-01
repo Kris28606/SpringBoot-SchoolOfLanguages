@@ -22,23 +22,49 @@ import fon.bg.ac.rs.schooloflanguages.mapper.StudentMapper;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
 import fon.bg.ac.rs.schooloflanguages.service.StudentService;
 
+/**
+ * <h1>Kontroler za entitet Student</h1>
+ * <p> Odgovora za definisanje End Point-a i pozivanje odgovarajucih servis metoda</p>
+ * @author Kristina
+ *
+ */
 @RestController
 @RequestMapping("student")
 @CrossOrigin("http://localhost:4200")
 public class StudentController {
+	/**
+	 * Servis za entitet Student
+	 */
 	@Autowired
 	private StudentService studentService;
+	/**
+	 * Mapper za entiter Student koji pretvara objekte iz StudentDto u Student i obrnuto
+	 */
 	private StudentMapper studentMapper;
 	
+	/**
+	 * Bezparametraski konstruktor u okviru kojeg se samo inicijalizuju vrednosti za student mapera
+	 */
 	public StudentController() {
 		studentMapper=new StudentMapper();
 	}
 	
+	/**
+	 * <h1>End point za vracanje svih studenata koji postoje u bazi </h1>
+	 * <p>Get ruta "student/all"</p>
+	 * @return Listu svih studenata koji postoje u bazi kao StudentDto objekte
+	 */
 	@GetMapping("all")
 	public List<StudentDto> vratiSve() {
 		return studentService.getAll();
 	}
 	
+	/**
+	 * <h1>End point za brisanje zadatog studenta </h1>
+	 * <p>Delete ruta "student/id"</p>
+	 * @param id - Id studenta kojeg treba obrisati
+	 * @return ResponseEntity - sa informacijom o uspesnosti izvrsenja upita
+	 */
 	@DeleteMapping("{id}")
 	public ResponseEntity<Map<String, Boolean>> obrisiStudenta(@PathVariable("id") Long id) {
 		try {
@@ -50,6 +76,16 @@ public class StudentController {
 		}
 	}
 	
+	/**
+	 * <h1>End point za cuvanje novog studenta </h1>
+	 * <p>Delete ruta "student/new"</p>
+	 * @param student - Novi Student kojeg treba sacuvati
+	 * @return
+	 * <ul> 
+	 * 	<li>ResponseEntity.ok(StudentDto)-ukoliko je Student uspesno sacuvan</li>
+	 *  <li>ResponseEntity.BadRequest()-ukoliko Student nije sacuvan</li>
+	 * </ul>
+	 */
 	@PostMapping("new")
 	public ResponseEntity<Object> sacuvajNovog(@RequestBody StudentDto student){
 		try {
