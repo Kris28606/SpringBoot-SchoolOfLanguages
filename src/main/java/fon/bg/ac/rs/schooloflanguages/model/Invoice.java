@@ -141,7 +141,7 @@ public class Invoice implements MyEntity {
 	 * 
 	 * @param date novi Datum kreiranja fakture kao Timestamp
 	 * @throws NullPointerException ukoliko je novi Datum null
-	 * @throws IllegalAccessException ukoliko je novi Datum kreiranja fakture u proslosti
+	 * @throws IllegalArgumentException ukoliko je novi Datum kreiranja fakture u proslosti
 	 */
 	public void setDate(Timestamp date) {
 		if(date==null) {

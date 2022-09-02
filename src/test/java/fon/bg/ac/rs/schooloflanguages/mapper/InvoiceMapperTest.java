@@ -1,6 +1,7 @@
 package fon.bg.ac.rs.schooloflanguages.mapper;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -24,6 +25,7 @@ import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 import fon.bg.ac.rs.schooloflanguages.model.PaymentMethod;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
+import net.bytebuddy.utility.privilege.GetMethodAction;
 
 class InvoiceMapperTest {
 
@@ -119,6 +121,9 @@ class InvoiceMapperTest {
 		assertEquals(i.getDate(), expected.getDate());
 		assertEquals(i.getPaymentMethod(), expected.getPaymentMethod());
 		assertEquals(i.isCancelled(), expected.isCancelled());
+		assertEquals(i.getStudent().getId(), expected.getStudent().getId());
+		assertEquals(i.getTotalPrice(), expected.getTotalPrice());
+		assertEquals(i.getItems().get(0).getSn(), expected.getItems().get(0).getSn());
 	}
 
 	@DisplayName("Test za pretvaranje iz Invoice objekta u InvoiceDto")
@@ -130,6 +135,8 @@ class InvoiceMapperTest {
 		assertEquals(dtoI.getDate(), dto.getDate());
 		assertEquals(dtoI.getPaymentMethod(), dto.getPaymentMethod());
 		assertEquals(dtoI.isCancelled(), dto.isCancelled());
+		assertEquals(dtoI.getStudent().getId(), dto.getStudent().getId());
+		assertEquals(dtoI.getItems().get(0).getSn(), dto.getItems().get(0).getSn());
 	}
 
 }

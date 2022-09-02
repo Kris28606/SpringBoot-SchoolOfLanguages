@@ -69,6 +69,7 @@ class InvoiceItemMapperTest {
 		
 		assertEquals(expected.getItemValue(), i.getItemValue());
 		assertEquals(expected.getSn(), i.getSn());
+		assertEquals(expected.getCourse(), i.getCourse());
 	}
 
 	@DisplayName("Test za pretvaranje iz InvoiceItemobjekta u InvoiceItemDto")
@@ -78,6 +79,7 @@ class InvoiceItemMapperTest {
 		
 		assertEquals(expected.getItemValue(), dto.getItemValue());
 		assertEquals(expected.getSn(), dto.getSn());
+		assertEquals(expected.getCourse().getId(), dto.getCourse().getId());
 	}
 
 }
