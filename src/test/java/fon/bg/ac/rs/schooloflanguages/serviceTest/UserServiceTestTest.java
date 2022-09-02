@@ -42,7 +42,7 @@ class UserServiceTestTest {
 	void testLogIn() throws ErrorException {
 		User u1=new User();
 		u1.setUsername("kiki");
-		u1.setPassword("kiki");
+		u1.setPassword("kiki2806");
 		
 		given(userRepository.findByUsernameAndPassword(u1.getUsername(),u1.getPassword())).willReturn(Optional.of(u1));
 		
@@ -58,7 +58,7 @@ class UserServiceTestTest {
 	void testLogInUserDoesntExist() {
 		User u2=new User();
 		u2.setUsername("pera");
-		u2.setPassword("pera");
+		u2.setPassword("pera1304");
 	
 		given(userRepository.findByUsernameAndPassword(u2.getUsername(),u2.getPassword())).willReturn(Optional.empty());
 	

@@ -2,7 +2,12 @@ package fon.bg.ac.rs.schooloflanguages.mapper;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -32,6 +37,19 @@ class TeacherMapperTest {
 		Course k=new Course();
 		k.setId(1L);
 		k.setName("Spanski jezik");
+		k.setPrice(new BigDecimal(17000));
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datumStart=new Timestamp(time);
+		
+		Date dateEnd = dateFormat.parse("28/02/2023");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		k.setStartDate(datumStart);
+		k.setEndDate(datumEnd);
+		
 		CourseDto kDto=courseMapper.toDto(k);
 		
 		List<Course> kursevi=new ArrayList<>();
@@ -41,16 +59,17 @@ class TeacherMapperTest {
 		City c=new City();
 		c.setName("Beograd");
 		c.setPTT(11000);
+		c.setId(1L);
 		
 		CityDto cDto=cityMapper.toDto(c);
-		t=new Teacher(3L,"Pera","Peric","Palanacke cete 14", "069876543",c,kursevi);
+		t=new Teacher(3L,"Pera","Peric","Palanacke cete 14", "0698765436",c,kursevi);
 		dto=new TeacherDto();
 		dto.setAddress("Palanacke cete 14");
 		dto.setCity(cDto);
 		dto.setFirst_name("Pera");
 		dto.setLast_name("Peric");
 		dto.setId(3L);
-		dto.setContact("069876543");
+		dto.setContact("0698765436");
 		dto.setCourses(kurseviDto);
 	}
 

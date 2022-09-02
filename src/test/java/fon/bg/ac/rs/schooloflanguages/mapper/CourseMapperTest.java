@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,16 +30,23 @@ class CourseMapperTest {
 		c.setId(1L);
 		c.setName("Engleskog jezika");
 		c.setPrice(new BigDecimal(15000));
-		Timestamp start=new Timestamp(1661975071898L);
-		Timestamp end=new Timestamp(1672975071898L);
-		c.setStartDate(start);
-		c.setEndDate(end);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datumStart=new Timestamp(time);
+		
+		Date dateEnd = dateFormat.parse("28/02/2022");
+		long timeEnd = date.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		
+		c.setStartDate(datumStart);
+		c.setEndDate(datumEnd);
 		dto=new CourseDto();
 		dto.setId(1L);
 		dto.setName("Engleskog jezika");
 		dto.setPrice(new BigDecimal(15000));
-		dto.setStartDate(start);
-		dto.setEndDate(end);
+		dto.setStartDate(datumStart);
+		dto.setEndDate(datumEnd);
 	}
 
 	@DisplayName("Test za pretvaranje iz CourseDto u Course objekat")

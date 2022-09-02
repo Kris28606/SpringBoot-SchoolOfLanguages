@@ -2,6 +2,7 @@ package fon.bg.ac.rs.schooloflanguages.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
@@ -132,14 +133,16 @@ public class Course implements MyEntity{
 	 * @param price Cena kursa
 	 * @param startDate Datum pocetka
 	 * @param endDate Datum zavrsetka
+	 * @throws NullPointerException ukoliko je bar neka od vrednosti za Price, StartDate i EndDate null
+	 * @throws IllegalArgumentException ukoliko su unete neodgovarajuce vrednosti za neke atribute
 	 */
 	public Course(Long id, String name, BigDecimal price, Timestamp startDate, Timestamp endDate) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		setId(id);
+		setName(name);
+		setPrice(price);
+		setStartDate(startDate);
+		setEndDate(endDate);
 	}
 	/**
 	 * Vraca Id kursa
@@ -154,8 +157,12 @@ public class Course implements MyEntity{
 	 * Postavlja vrednost za Id kursa
 	 * 
 	 * @param id novi Id za kurs
+	 * @throws IllegalArgumentException ukoliko je novi Id manji od jedan
 	 */
 	public void setId(Long id) {
+		if(id<=0) {
+			throw new IllegalArgumentException("Id mora biti veci od nule!");
+		}
 		this.id = id;
 	}
 	
@@ -172,8 +179,16 @@ public class Course implements MyEntity{
 	 * Postavlja vrednost za Naziv kursa
 	 * 
 	 * @param name novi Naziv za kurs kao String
+	 * @throws NullPointerException ukoliko je novi Naziv kursa null
+	 * @throws IllegalArgumentException ukoliko novi Naziv kursa ima manje od pet slova
 	 */
 	public void setName(String name) {
+		if(name==null) {
+			throw new NullPointerException("Naziv kursa ne sme biti null!");
+		}
+		if(name.length()<5) {
+			throw new IllegalArgumentException("Naziv kursa mora da ima bar pet slova!");
+		}
 		this.name = name;
 	}
 	
@@ -190,8 +205,16 @@ public class Course implements MyEntity{
 	 * Postavlja vrednost za Cenu kursa
 	 * 
 	 * @param price nova Cena za kurs kao decimalni broj BigDecimal
+	 * @throws NullPointerException ukoliko je nova Cena kursa null
+	 * @throws IllegalArgumentException ukoliko je nova Cena kursa manja od 5000 dinara
 	 */
 	public void setPrice(BigDecimal price) {
+		if(price==null) {
+			throw new NullPointerException("Cena ne sme biti null!");
+		}
+		if(price.intValue()<5000) {
+			throw new IllegalArgumentException("Cena ne sme biti manja od 5000 dinara!");
+		}
 		this.price = price;
 	}
 	
@@ -208,8 +231,17 @@ public class Course implements MyEntity{
 	 * Postavlja vrednost za Datum pocetka kursa
 	 * 
 	 * @param startDate novi Datum pocetka kursa kao Timestamp
+	 * @throws NullPointerException ukoliko je novi Datum pocetka kursa null
+	 * @throws IllegalArgumentException ukoliko je novi Datum pocetka kursa u proslosti
 	 */
 	public void setStartDate(Timestamp startDate) {
+		if(startDate==null) {
+			throw new NullPointerException("Datum pocetka kursa ne sme biti null!");
+		}
+		Timestamp t=Timestamp.from(Instant.now());
+		if(startDate.before(t)) {
+			throw new IllegalArgumentException("Datum pocetka mora biti u buducnosti!");
+		}
 		this.startDate = startDate;
 	}
 	
@@ -226,8 +258,16 @@ public class Course implements MyEntity{
 	 * Postavlja vrednost za Datum zavrsetka kursa
 	 * 
 	 * @param endDate novi Datum zavrsetka kursa kao Timestamp
+	 * @throws NullPointerException ukoliko je novi Datum zavrsetka kursa null
+	 * @throws IllegalArgumentException ukoliko je novi Datum zavrsteka kursa pre datuma pocetka kursa
 	 */
 	public void setEndDate(Timestamp endDate) {
+		if(endDate==null) {
+			throw new NullPointerException("Datum zavrsetka kursa ne sme biti null!");
+		}
+		if(endDate.before(startDate)) {
+			throw new IllegalArgumentException("Datum zavrsetka kursa mora biti u nakon datuma pocetka!");
+		}
 		this.endDate = endDate;
 	}
 	

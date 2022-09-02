@@ -94,13 +94,15 @@ public class InvoiceItem implements MyEntity{
 	 * @param sn Redni broj stavke
 	 * @param itemValue Vrednost stavke
 	 * @param course Kurs na koji se odnosi stavka
+	 * @throws NullPointerException ukoliko su Faktura i/ili Kurs null
+	 * @throws IllegalArgumentException ukoliko su unete neodgovarajuce vrednosti za atribute Redni broj stavke i Item Value
 	 */
 	public InvoiceItem(Invoice invoice, Long sn, double itemValue, Course course) {
 		super();
-		this.invoice = invoice;
-		this.sn = sn;
-		this.itemValue = itemValue;
-		this.course = course;
+		setInvoice(invoice);
+		setSn(sn);
+		setItemValue(itemValue);
+		setCourse(course);
 	}
 	
 	/**
@@ -116,8 +118,12 @@ public class InvoiceItem implements MyEntity{
 	 * Postavlja vrednost za Fakturu na koju se odnosi Stavka
 	 * 
 	 * @param invoice nova Faktura na koju se odnosi Stavka
+	 * @throws IllegalArgumentException ukoliko je nova Faktura null
 	 */
 	public void setInvoice(Invoice invoice) {
+		if(invoice==null) {
+			throw new NullPointerException("Faktura ne sme biti null!");
+		}
 		this.invoice = invoice;
 	}
 	
@@ -133,8 +139,12 @@ public class InvoiceItem implements MyEntity{
 	 * Postavlja Redni broj stavke
 	 * 
 	 * @param sn novi Redni broj stavke kao ceo broj tipa Long
+	 * @throws IllegalArgumentException ukoliko je novi Redni broj stavke manji od jedan
 	 */
 	public void setSn(Long sn) {
+		if(sn<=0) {
+			throw new IllegalArgumentException("Redni broj ne sme biti manji od jedan!");
+		}
 		this.sn = sn;
 	}
 	
@@ -151,8 +161,12 @@ public class InvoiceItem implements MyEntity{
 	 * Postavlja vrednost za Vrednost stavke
 	 * 
 	 * @param itemValue nova Vrednost stavke kao decimalni broj tipa Double
+	 * @throws IllegalArgumentException ukoliko je nova Vrednost stavke manja od 5000 dinara
 	 */
 	public void setItemValue(double itemValue) {
+		if(itemValue<5000) {
+			throw new IllegalArgumentException("Vrednost stavke ne sme biti manja od 5000din!");
+		}
 		this.itemValue = itemValue;
 	}
 	
@@ -169,8 +183,12 @@ public class InvoiceItem implements MyEntity{
 	 * Postavlja Kurs stavke
 	 * 
 	 * @param course novi Kurs na koji se odnosi stavka
+	 * @throws NullPointerException ukoliko je novi Kurs null
 	 */
 	public void setCourse(Course course) {
+		if(course==null) {
+			throw new NullPointerException("Kurs ne sme biti null!");
+		}
 		this.course = course;
 	}
 

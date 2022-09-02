@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -33,10 +36,18 @@ class InvoiceItemMapperTest {
 		k.setId(1L);
 		k.setName("Engleskog jezika");
 		k.setPrice(new BigDecimal(15000));
-		Timestamp start=new Timestamp(1661975071898L);
-		Timestamp end=new Timestamp(1672975071898L);
-		k.setStartDate(start);
-		k.setEndDate(end);
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datumStart=new Timestamp(time);
+		
+		Date dateEnd = dateFormat.parse("28/02/2023");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		
+		k.setStartDate(datumStart);
+		k.setEndDate(datumEnd);
 		
 		dtoK=courseMapper.toDto(k);
 		

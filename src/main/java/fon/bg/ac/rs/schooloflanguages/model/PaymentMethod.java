@@ -6,7 +6,7 @@ package fon.bg.ac.rs.schooloflanguages.model;
  * <ul>
  * 	<li>Kreditna kartica</li>
  *  <li>Gotovina</li>
- *  <li>PayPall</li>
+ *  <li>PayPal</li>
  * </ul>
  * @author Kristina
  *
@@ -14,5 +14,5 @@ package fon.bg.ac.rs.schooloflanguages.model;
 public enum PaymentMethod {
 	CreditCard,
 	Cash,
-	PayPall
+	PayPal
 }

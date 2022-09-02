@@ -1,6 +1,7 @@
 package fon.bg.ac.rs.schooloflanguages.model;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -94,15 +95,17 @@ public class Student implements MyEntity{
 	 * @param lastName Prezime studenta
 	 * @param datumRodjenja Datum rodjenja studenta
 	 * @param gender Pol studenta
+	 * @throws NullPointerException ukoliko su Ime, Prezime ili Datum rodjenja null
+	 * @throws IllegalArgumentException ukoliko nisu unete odgovarajuce vrednosti za atribute
 	 */
 	public Student(Long id,String firstName,String lastName,Timestamp datumRodjenja,
 			Gender gender) {
 		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.datumRodjenja = datumRodjenja;
-		this.gender = gender;
+		setId(id);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setDatumRodjenja(datumRodjenja);
+		setGender(gender);
 	}
 
 
@@ -137,8 +140,12 @@ public class Student implements MyEntity{
 	 * Postavlja vrednost za Id 
 	 * 
 	 * @param id novi Id studenta kao ceo broj tipa Long
+	 * @throws IllegalArgumentException ukoliko je novi Id studenta manji od jedan
 	 */
 	public void setId(Long id) {
+		if(id<=0) {
+			throw new IllegalArgumentException("Id mora biti veci od nule!");
+		}
 		this.id = id;
 	}
 	
@@ -155,8 +162,16 @@ public class Student implements MyEntity{
 	 * Postavlja vrednost za Ime studenta
 	 * 
 	 * @param firstName novo Ime studenta kao String
+	 * @throws NullPointerException ukoliko je novo Ime studenta null
+	 * @throws IllegalArgumentException ukoliko novo Ime studenta ima manje od tri slova
 	 */
 	public void setFirstName(String firstName) {
+		if(firstName==null) {
+			throw new NullPointerException("Ime ne sme biti null!");
+		}
+		if(firstName.length()<3) {
+			throw new IllegalArgumentException("Ime mora da ima bar tri slova!");
+		}
 		this.firstName = firstName;
 	}
 
@@ -173,8 +188,16 @@ public class Student implements MyEntity{
 	 * Postavlja vrednost za Prezime studenta
 	 * 
 	 * @param lastName novo Prezime studenta kao String
+	 * @throws NullPointerException ukoliko je novo Prezime studenta null
+	 * @throws IllegalArgumentException ukoliko novo Prezime studenta ima manje od cetiri slova
 	 */
 	public void setLastName(String lastName) {
+		if(lastName==null) {
+			throw new NullPointerException("Prezime ne sme biti null!");
+		}
+		if(lastName.length()<4) {
+			throw new IllegalArgumentException("Prezime mora da ima bar cetiri slova!");
+		}
 		this.lastName = lastName;
 	}
 	
@@ -191,8 +214,19 @@ public class Student implements MyEntity{
 	 * Postavlja vrednost za Datum rodjenja studenta
 	 * 
 	 * @param datumRodjenja novi Datum rodjenja studenta kao Timestamp
+	 * @throws NullPointerException ukoliko je novi Datum rodjenja null
+	 * @throws IllegalArgumentException ukoliko je student maloletan
 	 */
 	public void setDatumRodjenja(Timestamp datumRodjenja) {
+		if(datumRodjenja==null) {
+			throw new NullPointerException("Datum rodjenja ne sme biti null!");
+		}
+		
+		int godinaRodjenja=datumRodjenja.getYear();
+		int trenutnaGodina=Timestamp.from(Instant.now()).getYear();
+		if(trenutnaGodina-godinaRodjenja<18) {
+			throw new IllegalArgumentException("Student ne sme biti maloletan!");
+		}
 		this.datumRodjenja = datumRodjenja;
 	}
 
@@ -209,8 +243,16 @@ public class Student implements MyEntity{
 	 * Postavlja kurseve koje pohadja student
 	 * 
 	 * @param courses nova lista Kurseva koje pohadjaj student
+	 * @throws NullPointerException ukoliko je nova Lista kurseva null
+	 * @throws IllegalArgumentException ukoliko je nova lista Kurseva prazna
 	 */
 	public void setCourses(List<Course> courses) {
+		if(courses==null) {
+			throw new NullPointerException("Lista kurseva ne sme biti null!");
+		}
+		if(courses.size()<1) {
+			throw new IllegalArgumentException("Lista kurseva ne sme biti prazna!");
+		}
 		this.courses = courses;
 	}
 }

@@ -22,14 +22,14 @@ class UserMapperTest {
 		user.setFirstName("Kristina");
 		user.setId(1L);
 		user.setLastName("Stanisavljevic");
-		user.setPassword("kiki");
+		user.setPassword("kiki2806");
 		user.setUsername("kiki");
 		
 		dto=new UserDto();
 		dto.setFirstName("Kristina");
 		dto.setId(1L);
 		dto.setLastName("Stanisavljevic");
-		dto.setPassword("kiki");
+		dto.setPassword("kiki2806");
 		dto.setUsername("kiki");
 	}
 

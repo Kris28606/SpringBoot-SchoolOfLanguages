@@ -1,6 +1,7 @@
 package fon.bg.ac.rs.schooloflanguages.model;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -88,18 +89,20 @@ public class Invoice implements MyEntity {
 	 * @param cancelled Da li je stornirana
 	 * @param student Student na kojeg se odnosi faktura
 	 * @param items Stavke fakture
+	 * @throws NullPointerException ukoliko je bar jedna od vrednosti za Date ili Student null
+	 * @throws IllegalArgumentException ukoliko su unete nedozvoljenje vrednosti za neke od atributa
 	 */
 	public Invoice(Long id,Timestamp date,
 			double totalPrice, PaymentMethod paymentMethod, boolean cancelled, Student student,
 			List<InvoiceItem> items) {
 		super();
-		this.id = id;
-		this.date = date;
-		this.totalPrice = totalPrice;
-		this.paymentMethod = paymentMethod;
-		this.cancelled = cancelled;
-		this.student = student;
-		this.items = items;
+		setId(id);
+		setDate(date);
+		setTotalPrice(totalPrice);
+		setPaymentMethod(paymentMethod);
+		setCancelled(cancelled);
+		setStudent(student);
+		setItems(items);
 	}
 
 	/**
@@ -115,8 +118,12 @@ public class Invoice implements MyEntity {
 	 * Postavlja vrednost za Id fakture
 	 * 
 	 * @param id novi Id fakture kao ceo broj tipa Long
+	 * @throws IllegalArgumentException ukoliko je novi Id fakture manji od jedan
 	 */
 	public void setId(Long id) {
+		if(id<=0) {
+			throw new IllegalArgumentException("Id mora biti veci od nule!");
+		}
 		this.id = id;
 	}
 	
@@ -133,8 +140,17 @@ public class Invoice implements MyEntity {
 	 * Postavlja vrednost za Datum kreiranja fakture
 	 * 
 	 * @param date novi Datum kreiranja fakture kao Timestamp
+	 * @throws NullPointerException ukoliko je novi Datum null
+	 * @throws IllegalAccessException ukoliko je novi Datum kreiranja fakture u proslosti
 	 */
 	public void setDate(Timestamp date) {
+		if(date==null) {
+			throw new NullPointerException("Datum kreiranja fakture ne sme biti null!");
+		}
+		Timestamp trenutni=Timestamp.from(Instant.now());
+		if(date.before(trenutni)) {
+			throw new IllegalArgumentException("Datum kreiranja fakture mora biti u buducnosti!");
+		}
 		this.date = date;
 	}
 	
@@ -151,8 +167,12 @@ public class Invoice implements MyEntity {
 	 * Postavlja vrednost za Ukupnu vrednost fakture
 	 * 
 	 * @param totalPrice nova Ukupna vrednost fakture kao decimalni broj tipa Double
+	 * @throws IllegalArgumentException ukoliko je Ukupna vrednost fakture manja od 5000 dinara
 	 */
 	public void setTotalPrice(double totalPrice) {
+		if(totalPrice<5000) {
+			throw new IllegalArgumentException("Ukupna cena ne sme biti manja od 5000 dinara!");
+		}
 		this.totalPrice = totalPrice;
 	}
 	
@@ -209,8 +229,12 @@ public class Invoice implements MyEntity {
 	 * Postavlja vrednost za Studenta na kojeg se odnosi faktura
 	 * 
 	 * @param student novi Student na kojeg se odnosi faktura
+	 * @throws NullPointerException ukoliko je novi Student null
 	 */
 	public void setStudent(Student student) {
+		if(student==null) {
+			throw new NullPointerException("Student ne sme biti null!");
+		}
 		this.student = student;
 	}
 	

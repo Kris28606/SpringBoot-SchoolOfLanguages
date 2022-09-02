@@ -8,7 +8,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,9 +58,25 @@ class CourseServiceTestTest {
 		k=new Course();
 		k.setId(1L);
 		k.setName("Spanski jezik");
+		k.setPrice(new BigDecimal(17000));
 		k2=new Course();
 		k2.setId(2L);
 		k2.setName("Engleski jezik");
+		k2.setPrice(new BigDecimal(17000));
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/12/2022");
+		long time = date.getTime();
+		Timestamp datum=new Timestamp(time);
+		k2.setStartDate(datum);
+		k.setStartDate(datum);
+		
+		Date dateEnd = dateFormat.parse("28/12/2022");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		k2.setEndDate(datumEnd);
+		k.setEndDate(datumEnd);
+		
 		kursevi=new ArrayList<>();
 		kursevi.add(k);
 		kursevi.add(k2);

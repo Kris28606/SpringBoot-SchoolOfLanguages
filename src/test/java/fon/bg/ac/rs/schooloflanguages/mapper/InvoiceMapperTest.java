@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -38,17 +41,25 @@ class InvoiceMapperTest {
 		k.setId(123L);
 		k.setName("Kurs spanskog jezika");
 		k.setPrice(new BigDecimal(15000));
-		Timestamp start=new Timestamp(1661975071898L);
-		Timestamp end=new Timestamp(1672975071898L);
-		k.setStartDate(start);
-		k.setEndDate(end);
+
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datumStart=new Timestamp(time);
+		
+		Date dateEnd = dateFormat.parse("28/10/2022");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		
+		k.setStartDate(datumStart);
+		k.setEndDate(datumEnd);
 		
 		CourseDto dtoK=new CourseDto();
 		dtoK.setId(123L);
 		dtoK.setName("Kurs spanskog jezika");
 		dtoK.setPrice(new BigDecimal(15000));
-		dtoK.setStartDate(start);
-		dtoK.setEndDate(end);
+		dtoK.setStartDate(datumStart);
+		dtoK.setEndDate(datumEnd);
 		
 		InvoiceItemDto dto=new InvoiceItemDto();
 		dto.setItemValue(15000);
@@ -62,14 +73,17 @@ class InvoiceMapperTest {
 		ii.setSn(1L);
 		items=new ArrayList<>();
 		items.add(ii);
-		Timestamp datumRodjenja=new Timestamp(1661560744293L);
-		Timestamp datum=new Timestamp(1661559534045L);
+
+		Date dateBirth = dateFormat.parse("28/06/1999");
+		long timeBirth = dateBirth.getTime();
+		Timestamp datumBirth=new Timestamp(timeBirth);
+
 		Student s=new Student();
 		s.setFirstName("Kristina");
 		s.setLastName("Stanisavljevic");
 		s.setId(28L);
 		s.setGender(Gender.Female);
-		s.setDatumRodjenja(datumRodjenja);
+		s.setDatumRodjenja(datumBirth);
 		List<Course> kursevi=new ArrayList<>();
 		kursevi.add(k);
 		s.setCourses(kursevi);
@@ -80,16 +94,17 @@ class InvoiceMapperTest {
 		dtoS.setLastName("Stanisavljevic");
 		dtoS.setId(28L);
 		dtoS.setGender(Gender.Female);
-		dtoS.setDatumRodjenja(datumRodjenja);
+		dtoS.setDatumRodjenja(datumBirth);
 		List<CourseDto> courses=new ArrayList<>();
 		courses.add(dtoK);
 		dtoS.setCourses(courses);
 		
-		i=new Invoice(123L,datum,18999.99, PaymentMethod.Cash, false,s,items );
+		i=new Invoice(123L,datumStart,18999.99, PaymentMethod.Cash, false,s,items );
 		dtoI=new InvoiceDto();
 		dtoI.setCancelled(false);
-		dtoI.setDate(datum);
+		dtoI.setDate(datumStart);
 		dtoI.setId(123L);
+		dtoI.setTotalPrice(18999.99);
 		dtoI.setItems(itemsDto);
 		dtoI.setPaymentMethod(PaymentMethod.Cash);
 		dtoI.setStudent(dtoS);

@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -30,7 +33,10 @@ class StudentMapperTest {
 		s=new Student();
 		courseMapper=new CourseMapper();
 		mapper=new StudentMapper();
-		Timestamp datum=new Timestamp(1111115071898L);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/06/1999");
+		long time = date.getTime();
+		Timestamp datum=new Timestamp(time);
 		s.setDatumRodjenja(datum);
 		s.setFirstName("Pera");
 		s.setLastName("Peric");
@@ -43,13 +49,20 @@ class StudentMapperTest {
 		dto.setId(1L);
 		dto.setGender(Gender.Male);
 		
+		Date dateStartDate = dateFormat.parse("15/12/2022");
+		long timeStart = dateStartDate.getTime();
+		Timestamp datumStart=new Timestamp(timeStart);
+		
+		Date dateEndDate = dateFormat.parse("15/02/2023");
+		long timeEnd = dateEndDate.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
 		
 		Course k=new Course();
 		k.setId(1L);
 		k.setPrice(new BigDecimal(18000));
 		k.setName("Engleski jezik");
-		k.setStartDate(datum);
-		k.setEndDate(datum);
+		k.setStartDate(datumStart);
+		k.setEndDate(datumEnd);
 		CourseDto kDto=courseMapper.toDto(k);
 		
 		List<Course> kursevi=new ArrayList<>();

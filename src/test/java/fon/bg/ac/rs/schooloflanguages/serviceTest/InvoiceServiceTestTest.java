@@ -8,7 +8,13 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ch.qos.logback.core.encoder.ByteArrayUtil;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
+import fon.bg.ac.rs.schooloflanguages.model.Gender;
 import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 import fon.bg.ac.rs.schooloflanguages.model.PaymentMethod;
@@ -57,6 +64,7 @@ class InvoiceServiceTestTest {
 	public static List<Course> courses;
 	public static Student s;
 	public static Course k;
+	public static List<InvoiceItem> items;
 	
 	@AfterEach
 	void tearDown() throws Exception {
@@ -71,24 +79,46 @@ class InvoiceServiceTestTest {
 		i1.setPaymentMethod(PaymentMethod.Cash);
 		i1.setTotalPrice(18500.00);
 		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datum=new Timestamp(time);
+		i1.setDate(datum);
+		
+		Date dateEnd = dateFormat.parse("28/02/2023");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		
+		
 		k=new Course();
 		k.setId(1L);
 		k.setName("Spanski jezik");
-		List<Course> courses=new ArrayList<>();
+		k.setStartDate(datum);
+		k.setEndDate(datumEnd);
+		k.setPrice(new BigDecimal(16000));
+		
+		courses=new ArrayList<>();
 		courses.add(k);
 		
 		s=new Student();
 		s.setId(3L);
 		s.setFirstName("Kristina");
 		s.setLastName("Stanisavljevic");
+		s.setGender(Gender.Female);
+		
+		Date dateBirth = dateFormat.parse("28/02/1999");
+		long timeBirth = dateBirth.getTime();
+		Timestamp datumBirth=new Timestamp(timeBirth);
+		
+		s.setDatumRodjenja(datumBirth);
 		s.setCourses(courses);
 		
 		InvoiceItem ii=new InvoiceItem();
 		ii.setInvoice(i1);
-		ii.setItemValue(18500.00);
+		ii.setItemValue(16000.00);
 		ii.setSn(1L);
 		ii.setCourse(k);
-		List<InvoiceItem> items=new ArrayList<>();
+		items=new ArrayList<>();
 		items.add(ii);
 		
 		i1.setStudent(s);
@@ -191,12 +221,26 @@ class InvoiceServiceTestTest {
 	}
 	
 	@Test
-	void testVratiKurseveZaKorisnikaKojiImaFakturu() {
+	void testVratiKurseveZaKorisnikaKojiImaFakturu() throws ParseException {
 		List<Course> noviKursevi=new ArrayList<>();
 		noviKursevi.add(k);
 		Course k2=new Course();
 		k2.setId(22L);
 		k2.setName("Norveski jezik");
+		k2.setPrice(new BigDecimal(17000));
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse("28/10/2022");
+		long time = date.getTime();
+		Timestamp datumStart=new Timestamp(time);
+		
+		Date dateEnd = dateFormat.parse("28/02/2023");
+		long timeEnd = dateEnd.getTime();
+		Timestamp datumEnd=new Timestamp(timeEnd);
+		
+		k2.setStartDate(datumStart);
+		k2.setEndDate(datumEnd);
+		
 		noviKursevi.add(k2);
 		s.setCourses(noviKursevi);
 		
@@ -208,7 +252,6 @@ class InvoiceServiceTestTest {
 		
 		assertNotNull(expected);
 		assertThat(expected.size()>0);
-		//assertEquals(expected, s.getCourses());
 		
 		verify(invoiceRepository).findByStudent(any(Student.class));
 	}
