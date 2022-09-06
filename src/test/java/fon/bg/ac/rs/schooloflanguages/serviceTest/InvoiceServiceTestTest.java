@@ -20,19 +20,15 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import ch.qos.logback.core.encoder.ByteArrayUtil;
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.model.Gender;
@@ -40,11 +36,9 @@ import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 import fon.bg.ac.rs.schooloflanguages.model.PaymentMethod;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
-import fon.bg.ac.rs.schooloflanguages.repository.CourseRepository;
 import fon.bg.ac.rs.schooloflanguages.repository.InvoiceItemRepository;
 import fon.bg.ac.rs.schooloflanguages.repository.InvoiceRepository;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class InvoiceServiceTestTest {

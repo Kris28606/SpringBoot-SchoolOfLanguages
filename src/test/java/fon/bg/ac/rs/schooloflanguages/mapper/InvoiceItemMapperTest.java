@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import fon.bg.ac.rs.schooloflanguages.dto.CourseDto;
 import fon.bg.ac.rs.schooloflanguages.dto.InvoiceItemDto;
 import fon.bg.ac.rs.schooloflanguages.model.Course;
-import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 
 class InvoiceItemMapperTest {

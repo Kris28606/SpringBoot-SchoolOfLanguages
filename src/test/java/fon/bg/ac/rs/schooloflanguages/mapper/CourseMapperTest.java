@@ -8,9 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,8 +33,8 @@ class CourseMapperTest {
 		long time = date.getTime();
 		Timestamp datumStart=new Timestamp(time);
 		
-		Date dateEnd = dateFormat.parse("28/02/2022");
-		long timeEnd = date.getTime();
+		Date dateEnd = dateFormat.parse("28/02/2023");
+		long timeEnd = dateEnd.getTime();
 		Timestamp datumEnd=new Timestamp(timeEnd);
 		
 		c.setStartDate(datumStart);

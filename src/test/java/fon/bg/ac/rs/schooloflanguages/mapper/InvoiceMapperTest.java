@@ -1,7 +1,6 @@
 package fon.bg.ac.rs.schooloflanguages.mapper;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.CALLS_REAL_METHODS;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -25,7 +24,6 @@ import fon.bg.ac.rs.schooloflanguages.model.Invoice;
 import fon.bg.ac.rs.schooloflanguages.model.InvoiceItem;
 import fon.bg.ac.rs.schooloflanguages.model.PaymentMethod;
 import fon.bg.ac.rs.schooloflanguages.model.Student;
-import net.bytebuddy.utility.privilege.GetMethodAction;
 
 class InvoiceMapperTest {
 

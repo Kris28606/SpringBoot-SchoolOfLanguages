@@ -20,13 +20,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import fon.bg.ac.rs.schooloflanguages.exception.ErrorException;
 import fon.bg.ac.rs.schooloflanguages.model.City;
@@ -34,7 +32,6 @@ import fon.bg.ac.rs.schooloflanguages.model.Course;
 import fon.bg.ac.rs.schooloflanguages.model.Teacher;
 import fon.bg.ac.rs.schooloflanguages.repository.TeacherRepository;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class TeacherServiceTestTest {
